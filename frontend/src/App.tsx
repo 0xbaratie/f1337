@@ -55,9 +55,10 @@ const App = () => {
       
       if ("data" in response) {
           const responseData = response.data;
-          setYourNum(parseInt(responseData, 16).toString());
-          console.log("@@response=", response);
-          console.log("@@responseData=", parseInt(responseData, 16).toString());
+          setYourNum('1');
+          // setYourNum(parseInt(responseData, 16).toString());
+          // console.log("@@response=", response);
+          // console.log("@@responseData=", parseInt(responseData, 16).toString());
       }
   }
   })
