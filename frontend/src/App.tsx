@@ -84,9 +84,9 @@ const App = () => {
   }, [address]);
 
   useEffect(() => {
-    if (isSuccess && parseInt(yourNum) > 0) {
-      setModalOpen(true);
-    }
+    // if (isSuccess && parseInt(yourNum) > 0) {
+    //   setModalOpen(true);
+    // }
   }, [yourNum]);
 
   RandomInterval(counter, setCounter, setRandomNumber);
@@ -128,13 +128,13 @@ const App = () => {
           <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
               @{farcasterName}
           </a>
-          {isWriteLoading || parseInt(yourNum) > 0 ?
+          {/* {isWriteLoading || parseInt(yourNum) > 0 ?
             <span className="mt-4 loading loading-spinner text-primary"></span>
             :
             <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
               Stop number
             </button>
-          }
+          } */}
         </>
       ) : (
         !address ? (
