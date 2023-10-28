@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { WalletConnect } from './WalletConnect';
 import {
   useAccount,
-  useContractRead
+  useContractRead,
+  useContractWrite,
+  useWaitForTransaction,
 } from 'wagmi'
-import { ConnectedSocialAccount } from "./graphql/ConnectedSocialAccount";
 import { NFTContractAbi } from './data/NFTContractAbi';
 import { NFTContractAddress } from './data/NFTContractAddress';
 import SocialAccountData from './data/SocialAccountData';
@@ -30,6 +31,29 @@ const App = () => {
     functionName: 'getLotteryNumbers',
     watch: true,
   })
+  const [yourNum, setYourNum] = useState('');
+
+  const { data: writeData, isLoading: isWriteLoading, isSuccess, write  } = useContractWrite({
+    address: NFTContractAddress,
+    abi: NFTContractAbi,
+    functionName: 'mint',
+  })
+
+  const hashValue = writeData?.hash;
+  const { data: waitData, isError: waitIsError, isLoading: waitIsLoading } = useWaitForTransaction({
+    hash: hashValue,
+    onSettled(data, error) {
+      const response = data ? data.logs[0] : [];
+      
+      if ("data" in response) {
+          const responseData = response.data;
+          setYourNum(parseInt(responseData, 16).toString());
+          console.log("@@response=", response);
+          console.log("@@responseData=", parseInt(responseData, 16).toString());
+      }
+  }
+  })
+
   const NumberSpan: React.FC<NumberSpanProps> = ({ children, marginRight = true }) => (
     <span className={`text-primary-text font-bold mb-2 md:mb-0 ${marginRight ? 'mr-8' : ''} font-mono`}>
       {children}
@@ -54,6 +78,8 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      {isSuccess && <div>Transaction result: {yourNum}</div>}
+      
       <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
       <p  className="mt-4 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
       <div className="mt-10">
@@ -75,13 +101,14 @@ const App = () => {
       >
 
       </div>
-      {address && connectedFarcaster ? (
+      {/* {address && connectedFarcaster ? ( */}
+      {address  ? (
         <>
           <WalletConnect />
           <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
               @{farcasterName}
           </a>
-          <button className="mt-6 btn bg-primary text-white" type="button">
+          <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
             Stop number
           </button>
         </>
