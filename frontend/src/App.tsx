@@ -28,6 +28,7 @@ const App = () => {
     address: NFTContractAddress,
     abi: NFTContractAbi,
     functionName: 'getLotteryNumbers',
+    watch: true,
   })
   const NumberSpan: React.FC<NumberSpanProps> = ({ children, marginRight = true }) => (
     <span className={`text-primary-text font-bold mb-2 md:mb-0 ${marginRight ? 'mr-8' : ''} font-mono`}>
@@ -38,7 +39,7 @@ const App = () => {
   useEffect(() => {
     console.log("@@@stringifiedNums=", data);
     if (Array.isArray(data) && data.length === 8) {
-      const stringifiedNums = data.map(num => num.toString());
+      const stringifiedNums = data.map(num => num.toString().padStart(4, '0')).reverse();
       setLatestNums(stringifiedNums);
     }
   }, [data]);
