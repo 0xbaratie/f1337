@@ -71,8 +71,8 @@ const App = () => {
   useEffect(() => {
     console.log("@@@stringifiedNums=", data);
     if (Array.isArray(data) && data.length === 8) {
-      const stringifiedNums = data.map(num => num.toString().padStart(4, '0')).reverse();
-      setLatestNums(stringifiedNums);
+      // const stringifiedNums = data.map(num => num.toString().padStart(4, '0')).reverse();
+      // setLatestNums(stringifiedNums);
     }
   }, [data]);
 
