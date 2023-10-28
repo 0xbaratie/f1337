@@ -24,7 +24,7 @@ const App = () => {
 
   async function fetchData(address: string) {
     try {
-      const data = await ConnectedSocialAccount();
+      const data = await ConnectedSocialAccount(address);
       if (data && data.Socials && data.Socials.Social) {
         setSocialData(data.Socials.Social);
 
