@@ -13,6 +13,7 @@
     "@types/node": "^18.16.12",
     "@types/react": "18.2.21",
     "buffer": "npm:buffer@6.0.3",
+    "daisyui": "^3.9.4",
     "graphql": "^16.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
