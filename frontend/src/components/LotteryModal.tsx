@@ -1,4 +1,5 @@
-import React , { useEffect, useState } from 'react';
+import { parse } from 'path';
+import React, { useEffect, useState } from 'react';
 
 interface LotteryModalProps {
   onClose: () => void;
@@ -15,14 +16,14 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
 
   return (
     <div className="p-6">
-      <div className="grid place-items-center">  
-        {yourNum === "1337" ? 
-          <img src="/lotterySuccess/0.gif" alt="Lottery Success" /> 
-          : 
+      <div className="grid place-items-center">
+        {yourNum === "1337" ?
+          <img src="/lotterySuccess/0.gif" alt="Lottery Success" />
+          :
           <img src={`/lotteryFailed/${randomGifNum}.gif`} alt="Lottery Failure" />
         }
       </div>
-      <p className="text-4xl mt-10 text-primary font-bold text-center"> {yourNum}</p>
+      <p className="text-4xl mt-10 text-primary font-bold text-center">{yourNum}</p>
     </div>
   );
 };
