@@ -6,13 +6,54 @@ import {
 import {
   useAccount,
 } from 'wagmi'
+import { ConnectedSocialAccount } from "./graphql/ConnectedSocialAccount";
+
+type SocialType = {
+  dappName: string;
+  profileName: string;
+};
 
 const App = () => {
   const { address } = useAccount()
   const [randomNumber, setRandomNumber] = useState('1337');
   const [connectedFarcaster, setConnectedFarcaster] = useState(false);
-  console.log("@@@address=",address);
+  const [farcasterName, setFarcasterName] = useState('');
+  const [socialData, setSocialData] = useState([]);
   const [counter, setCounter] = useState(1);
+  const [error, setError] = useState<string | null>(null);
+
+  async function fetchData(address: string) {
+    try {
+      const data = await ConnectedSocialAccount();
+      if (data && data.Socials && data.Socials.Social) {
+        setSocialData(data.Socials.Social);
+
+        const farcasterSocial = data.Socials.Social.find((social: SocialType) =>
+            social.dappName.includes("farcaster")
+        );
+
+        if (farcasterSocial) {
+            setFarcasterName(farcasterSocial.profileName);
+            setConnectedFarcaster(true);
+        } else {
+            setConnectedFarcaster(false);
+        }
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
+      
+  }
+
+  useEffect(() => {
+    if (address && socialData.length === 0 && !connectedFarcaster) {
+      fetchData(address);
+    }
+  }, [address]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,10 +68,11 @@ const App = () => {
       }
 
       setRandomNumber(num.toString());
-    }, 100);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [counter]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
@@ -58,7 +100,11 @@ const App = () => {
       </div>
       {address && connectedFarcaster ? (
         <>
-          <button className="mt-4 btn bg-primary text-white" type="button">
+          <WalletConnect />
+          <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
+              @{farcasterName}
+          </a>
+          <button className="mt-6 btn bg-primary text-white" type="button">
             Stop number
           </button>
         </>
