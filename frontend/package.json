@@ -2,6 +2,7 @@
   "name": "f1337",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@rainbow-me/rainbowkit": "^1.1.3",
     "@testing-library/jest-dom": "^6.1.3",
