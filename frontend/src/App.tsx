@@ -33,11 +33,11 @@ const App = () => {
   }, [counter]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transation 1337?</h1>
+      <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
       <p  className="mt-2 text-ml text-gray-400 font-bold">~ Powered by farcaster & Base ~ </p>
       <div className="mt-10">
         <div className="flex flex-wrap justify-between mb-4">
-          <span className="text-gray-400 font-bold mb-2 md:mb-0 md:mr-8 font-mono">1111</span>
+          <span className="text-gray-400 font-bold mb-2 md:mb-0 md:mr-8 font-mono">....</span>
           <span className="text-gray-400 font-bold mb-2 md:mb-0 md:mr-8 font-mono">2222</span>
           <span className="text-gray-400 font-bold mb-2 md:mb-0 md:mr-8 font-mono">3333</span>
           <span className="text-gray-400 font-bold mb-2 md:mb-0 md:mr-8 font-mono">4444</span>
