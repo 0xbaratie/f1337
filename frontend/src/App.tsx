@@ -5,8 +5,11 @@ import {
 } from '@rainbow-me/rainbowkit';
 import {
   useAccount,
+  useContractRead
 } from 'wagmi'
 import { ConnectedSocialAccount } from "./graphql/ConnectedSocialAccount";
+import { NFTContractAbi } from './data/NFTContractAbi';
+import { NFTContractAddress } from './data/NFTContractAddress';
 
 type SocialType = {
   dappName: string;
@@ -21,6 +24,7 @@ const App = () => {
   const [socialData, setSocialData] = useState([]);
   const [counter, setCounter] = useState(1);
   const [error, setError] = useState<string | null>(null);
+  const [latestNums, setLatestNums] = useState<string[]>(["....","....","....","....","....","....","....","...."]);
 
   async function fetchData(address: string) {
     try {
@@ -46,12 +50,23 @@ const App = () => {
         setError("An unexpected error occurred.");
       }
     }
-      
   }
+
+  const { data, isError, isLoading } = useContractRead({
+    address: NFTContractAddress,
+    abi: NFTContractAbi,
+    functionName: 'getLotteryNumbers',
+  })
+  useEffect(() => {
+    if (Array.isArray(data) && data.length === 8) {
+      const stringifiedNums = data.map(num => num.toString());
+      setLatestNums(stringifiedNums);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (address && socialData.length === 0 && !connectedFarcaster) {
-      fetchData(address);
+      // fetchData(address);
     }
   }, [address]);
 
@@ -80,16 +95,16 @@ const App = () => {
       <div className="mt-10">
         <div className="flex flex-wrap justify-between mb-4">
           <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">....</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">2222</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">3333</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">4444</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 font-mono">5555</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[0]}</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[1]}</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[2]}</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 font-mono">{latestNums[3]}</span>
         </div>
         <div className="flex flex-wrap justify-between">
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">1111</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">2222</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">3333</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">4444</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[4]}</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[5]}</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[6]}</span>
+          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[7]}</span>
           <span className="text-primary mb-2 md:mb-0 font-mono">{randomNumber}</span>
         </div>
       </div>
