@@ -10,6 +10,8 @@ import { NFTContractAbi } from './data/NFTContractAbi';
 import { NFTContractAddress } from './data/NFTContractAddress';
 import SocialAccountData from './data/SocialAccountData';
 import RandomInterval from './data/RandomInterval';
+import FullScreenModal from './components/FullScreenModal';
+import LotteryModal from './components/LotteryModal';
 
 type NumberSpanProps = {
   children: React.ReactNode;
@@ -24,6 +26,12 @@ const App = () => {
   const [socialData, setSocialData] = useState([]);
   const [counter, setCounter] = useState(1);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  
+  const closeModal = () => {
+    setModalOpen(false);
+    setYourNum('');
+  };
   const [latestNums, setLatestNums] = useState<string[]>(["....","....","....","....","....","....","....","...."]);
   const { data, isError, isLoading } = useContractRead({
     address: NFTContractAddress,
@@ -74,11 +82,22 @@ const App = () => {
     }
   }, [address]);
 
+  useEffect(() => {
+    if (isSuccess && parseInt(yourNum) > 0) {
+      setModalOpen(true);
+    }
+  }, [yourNum]);
+
   RandomInterval(counter, setCounter, setRandomNumber);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      {isSuccess && <div>Transaction result: {yourNum}</div>}
+      <FullScreenModal isOpen={modalOpen} onClose={closeModal}>
+        <LotteryModal
+          onClose={closeModal}
+          yourNum={yourNum}
+        />
+      </FullScreenModal>
       
       <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
       <p  className="mt-4 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
