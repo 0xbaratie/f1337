@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { WalletConnect } from './WalletConnect';
 import {
-  useConnectModal
-} from '@rainbow-me/rainbowkit';
-import {
   useAccount,
   useContractRead
 } from 'wagmi'
 import { ConnectedSocialAccount } from "./graphql/ConnectedSocialAccount";
 import { NFTContractAbi } from './data/NFTContractAbi';
 import { NFTContractAddress } from './data/NFTContractAddress';
+import SocialAccountData from './data/SocialAccountData';
+import RandomInterval from './data/RandomInterval';
 
-type SocialType = {
-  dappName: string;
-  profileName: string;
+type NumberSpanProps = {
+  children: React.ReactNode;
+  marginRight?: boolean;
 };
 
 const App = () => {
@@ -25,39 +24,19 @@ const App = () => {
   const [counter, setCounter] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [latestNums, setLatestNums] = useState<string[]>(["....","....","....","....","....","....","....","...."]);
-
-  async function fetchData(address: string) {
-    try {
-      const data = await ConnectedSocialAccount(address);
-      if (data && data.Socials && data.Socials.Social) {
-        setSocialData(data.Socials.Social);
-
-        const farcasterSocial = data.Socials.Social.find((social: SocialType) =>
-            social.dappName.includes("farcaster")
-        );
-
-        if (farcasterSocial) {
-            setFarcasterName(farcasterSocial.profileName);
-            setConnectedFarcaster(true);
-        } else {
-            setConnectedFarcaster(false);
-        }
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("An unexpected error occurred.");
-      }
-    }
-  }
-
   const { data, isError, isLoading } = useContractRead({
     address: NFTContractAddress,
     abi: NFTContractAbi,
     functionName: 'getLotteryNumbers',
   })
+  const NumberSpan: React.FC<NumberSpanProps> = ({ children, marginRight = true }) => (
+    <span className={`text-primary-text font-bold mb-2 md:mb-0 ${marginRight ? 'mr-8' : ''} font-mono`}>
+      {children}
+    </span>
+  );
+
   useEffect(() => {
+    console.log("@@@stringifiedNums=", data);
     if (Array.isArray(data) && data.length === 8) {
       const stringifiedNums = data.map(num => num.toString());
       setLatestNums(stringifiedNums);
@@ -66,27 +45,11 @@ const App = () => {
 
   useEffect(() => {
     if (address && socialData.length === 0 && !connectedFarcaster) {
-      // fetchData(address);
+      SocialAccountData(address, setSocialData, setFarcasterName, setConnectedFarcaster, setError);
     }
   }, [address]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let num;
-
-      if (counter === 10) {
-        num = 1377;
-        setCounter(1);
-      } else {
-        num = Math.floor(Math.random() * 9000) + 1000;
-        setCounter(prev => prev + 1);
-      }
-
-      setRandomNumber(num.toString());
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [counter]);
+  RandomInterval(counter, setCounter, setRandomNumber);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -94,18 +57,16 @@ const App = () => {
       <p  className="mt-4 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
       <div className="mt-10">
         <div className="flex flex-wrap justify-between mb-4">
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">....</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[0]}</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[1]}</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[2]}</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 font-mono">{latestNums[3]}</span>
+          <NumberSpan>....</NumberSpan>
+          {latestNums.slice(0, 4).map((num, index) => (
+            <NumberSpan key={index} marginRight={index !== 3}>{num}</NumberSpan>
+          ))}
         </div>
         <div className="flex flex-wrap justify-between">
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[4]}</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[5]}</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[6]}</span>
-          <span className="text-primary-text font-bold mb-2 md:mb-0 md:mr-8 font-mono">{latestNums[7]}</span>
-          <span className="text-primary mb-2 md:mb-0 font-mono">{randomNumber}</span>
+          {latestNums.slice(4).map((num, index) => (
+            <NumberSpan key={index + 4} marginRight={true}>{num}</NumberSpan>
+          ))}
+          <NumberSpan marginRight={false}>{randomNumber}</NumberSpan>
         </div>
       </div>
       <div
