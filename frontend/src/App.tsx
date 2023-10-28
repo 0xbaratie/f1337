@@ -102,55 +102,7 @@ const App = () => {
       
       <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
       <p  className="mt-4 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
-      <div className="mt-10">
-        <div className="flex flex-wrap justify-between mb-4">
-          <NumberSpan>....</NumberSpan>
-          {latestNums.slice(0, 4).map((num, index) => (
-            <NumberSpan key={index} marginRight={index !== 3}>{num}</NumberSpan>
-          ))}
-        </div>
-        <div className="flex flex-wrap justify-between">
-          {latestNums.slice(4).map((num, index) => (
-            <NumberSpan key={index + 4} marginRight={true}>{num}</NumberSpan>
-          ))}
-          <NumberSpan marginRight={false}>{randomNumber}</NumberSpan>
-        </div>
-      </div>
-      <div
-        className="mt-12 flex justify-end p-3"
-      >
-
-      </div>
-      {/* {address && connectedFarcaster ? ( */}
-      {address  ? (
-        <>
-          <WalletConnect />
-          <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
-              @{farcasterName}
-          </a>
-          {/* {isWriteLoading || parseInt(yourNum) > 0 ?
-            <span className="mt-4 loading loading-spinner text-primary"></span>
-            :
-            <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
-              Stop number
-            </button>
-          } */}
-        </>
-      ) : (
-        !address ? (
-          <WalletConnect />
-        ) : (
-          <>
-            <a href="https://www.farcaster.xyz/" className="underline mt-2 text-red-400" target="_blank" rel="noopener noreferrer">
-              Your wallet need to connect with farcaster account
-            </a>
-            <WalletConnect />
-            <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
-              Stop number
-            </button>
-          </>
-        )
-      )}
+      
 
     </div>
   );
