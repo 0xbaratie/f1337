@@ -8,7 +8,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import {
-  base,
+  // base,
   baseGoerli,
 } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
@@ -17,7 +17,7 @@ import App from './App';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    base,
+    // base,
     baseGoerli,
     ...(process.env.REACT_APP_ENABLE_TESTNETS === 'true' ? [baseGoerli] : []),
   ],

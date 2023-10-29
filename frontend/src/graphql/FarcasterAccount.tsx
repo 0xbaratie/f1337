@@ -9,18 +9,16 @@ const client = new ApolloClient({
     headers: { Authorization: AIRSTACK_API_KEY || "" },
 })
 
-export async function ConnectedSocialAccount(address: string): Promise<any> {
+export async function FarcasterAccount(address: string): Promise<any> {
     const query = gql`
-      query GetAllSocials {
-        Socials(
-          input: {filter: {userAssociatedAddresses: {_eq: $address}}, blockchain: ethereum}
-        ) {
-          Social {
+      query FarcasterAccount {
+        Wallet(input: {identity: "${address}", blockchain: ethereum}) {
+          socials(input: {filter: {dappName: {_eq: farcaster}}}) {
             dappName
             profileName
           }
         }
-        }
+      }
     `
     
     const response = await client.query({

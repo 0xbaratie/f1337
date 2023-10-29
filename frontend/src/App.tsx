@@ -23,7 +23,6 @@ const App = () => {
   const [randomNumber, setRandomNumber] = useState('1337');
   const [connectedFarcaster, setConnectedFarcaster] = useState(false);
   const [farcasterName, setFarcasterName] = useState('');
-  const [socialData, setSocialData] = useState([]);
   const [counter, setCounter] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -74,8 +73,8 @@ const App = () => {
   useEffect(() => {
     if (numberData !== undefined) { 
       const numberAsString = numberData.toString().padStart(4, '0');
-      console.log("@@@numberData.padStart(4, '0')=", numberAsString);
-  
+      // console.log("@@@numberData.padStart(4, '0')=", numberAsString);
+
       setLatestNums(prevNums => {
         const newNums = [numberAsString, ...prevNums];
         return newNums.slice(0, 10);
@@ -84,8 +83,12 @@ const App = () => {
   }, [numberData]);
 
   useEffect(() => {
-    if (address && socialData.length === 0 && !connectedFarcaster) {
-      SocialAccountData(address, setSocialData, setFarcasterName, setConnectedFarcaster, setError);
+    
+    if (address &&  !connectedFarcaster) {
+      // [FOR TEST]
+      // const addressA = "0x6d92e36f3c7c309f90e7ca98d06e6599649961e3"
+      // SocialAccountData(addressA, setFarcasterName, setConnectedFarcaster, setError);
+      SocialAccountData(address, setFarcasterName, setConnectedFarcaster, setError);
     }
   }, [address]);
 
@@ -111,8 +114,7 @@ const App = () => {
       <p  className="mt-4 mb-6 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
 
       <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
-      {/* {address && connectedFarcaster ? ( */}
-      {address  ? (
+      {address && connectedFarcaster ? (
         <>
           <WalletConnect />
           <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
@@ -131,8 +133,8 @@ const App = () => {
           <WalletConnect />
         ) : (
           <>
-            <a href="https://www.farcaster.xyz/" className="underline mt-2 text-red-400" target="_blank" rel="noopener noreferrer">
-              Your wallet need to connect with farcaster account
+            <a href="https://www.farcaster.xyz/" className="underline mt-2 mb-2  text-red-400" target="_blank" rel="noopener noreferrer">
+              Your wallet need to connect with farcaster account(Up to 5 accounts per sec via Airstack's API)
             </a>
             <WalletConnect />
             <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
