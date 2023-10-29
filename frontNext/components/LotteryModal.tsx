@@ -20,9 +20,9 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
       
       <div className="grid place-items-center">
         {yourNum === "1337" ?
-          <img src="/lotterySuccess/0.gif" alt="Lottery Success" />
+          <img src="/success/0.GIF" alt="Lottery Success" />
           :
-          <img src={`/lotteryFailed/${randomGifNum}.gif`} alt="Lottery Failure" />
+          <img src={`/failed/${randomGifNum}.gif`} alt="Lottery Failure" />
         }
       </div>
       <p className="mt-4 text-xl  text-primary text-center">Airdropped the NFT to your wallet.</p>
