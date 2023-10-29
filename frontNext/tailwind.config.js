@@ -13,6 +13,7 @@ module.exports = {
         primary: {
           DEFAULT: '#8264CA',
           text: '#8A63D2',
+          hover: '#A682FF',
         },
       },
     },

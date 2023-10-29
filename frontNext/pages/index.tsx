@@ -15,6 +15,7 @@ import SocialAccountData from '../data/SocialAccountData';
 import RandomInterval from '../data/RandomInterval';
 import FullScreenModal from '../components/FullScreenModal';
 import LotteryModal from '../components/LotteryModal';
+import { Footer } from '../components/Footer';
 
 type NumberSpanProps = {
   children: React.ReactNode;
@@ -130,17 +131,17 @@ const Home: NextPage = () => {
               {isWriteLoading || parseInt(yourNum) > 0 ? (
                 <span className="mt-4 loading loading-spinner text-primary"></span>
               ) : (
-                <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
+                <button className="mt-6 btn bg-primary text-white hover:bg-primary-hover" type="button" onClick={() => write()}>
                   Stop
                 </button>
               )}
             </>
           ) : (
             <>
-              <a href="https://www.farcaster.xyz/" className="underline mt-2 text-red-400" target="_blank" rel="noopener noreferrer">
-                Your wallet needs to connect with a farcaster account
+              <a href="https://www.farcaster.xyz/" className="underline mt-4 mb-2 text-red-400" target="_blank" rel="noopener noreferrer">
+                Your wallet needs to connect with a farcaster account (Only get 5/sec for all users due to Airstack API)
               </a>
-              <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
+              <button className="mt-2 btn bg-gray-700 text-black disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed" disabled type="button">
                 Stop
               </button>
             </>
@@ -160,7 +161,7 @@ const Home: NextPage = () => {
           ))}
         </div>
       </div>
-      
+      <Footer />
     </div>
 
   );
