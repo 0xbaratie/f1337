@@ -71,13 +71,15 @@ const App = () => {
   );
 
   useEffect(() => {
-    if (numberData !== undefined) { 
+    if (numberData !== undefined) {
       const numberAsString = numberData.toString().padStart(4, '0');
-      // console.log("@@@numberData.padStart(4, '0')=", numberAsString);
-
+      
       setLatestNums(prevNums => {
-        const newNums = [numberAsString, ...prevNums];
-        return newNums.slice(0, 10);
+        if (!prevNums.includes(numberAsString)) {
+          const newNums = [numberAsString, ...prevNums];
+          return newNums.slice(0, 10);
+        }
+        return prevNums; 
       });
     }
   }, [numberData]);
