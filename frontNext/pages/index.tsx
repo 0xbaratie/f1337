@@ -29,6 +29,7 @@ const Home: NextPage = () => {
   const [counter, setCounter] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   
   const closeModal = () => {
     setModalOpen(false);
@@ -73,7 +74,9 @@ const Home: NextPage = () => {
     </span>
   );
 
+
   useEffect(() => {
+
     if (numberData !== undefined) {
       const numberAsString = numberData.toString().padStart(4, '0');
       
@@ -85,9 +88,6 @@ const Home: NextPage = () => {
         return prevNums; 
       });
     }
-  }, [numberData]);
-
-  useEffect(() => {
     
     if (address &&  !connectedFarcaster) {
       // [FOR TEST]
@@ -95,13 +95,13 @@ const Home: NextPage = () => {
       // SocialAccountData(addressA, setFarcasterName, setConnectedFarcaster, setError);
       SocialAccountData(address, setFarcasterName, setConnectedFarcaster, setError);
     }
-  }, [address]);
 
-  useEffect(() => {
     if (isSuccess && parseInt(yourNum) > 0) {
       setModalOpen(true);
     }
-  }, [yourNum]);
+    setIsClient(true);
+  }, [address, yourNum, numberData]);
+
   
 
   RandomInterval(counter, setCounter, setRandomNumber);
@@ -119,35 +119,34 @@ const Home: NextPage = () => {
       <p  className="mt-4 mb-6 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
 
       <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
-      {/* {address && connectedFarcaster ? (
+      {isClient && address && (
         <>
           <WalletConnect />
-          <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
-              @{farcasterName}
-          </a>
-          {isWriteLoading || parseInt(yourNum) > 0 ?
-            <span className="mt-4 loading loading-spinner text-primary"></span>
-            :
-            <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
-              Stop
-            </button>
-          }
+          {connectedFarcaster ? (
+            <>
+              <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
+                @{farcasterName}
+              </a>
+              {isWriteLoading || parseInt(yourNum) > 0 ? (
+                <span className="mt-4 loading loading-spinner text-primary"></span>
+              ) : (
+                <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
+                  Stop
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              <a href="https://www.farcaster.xyz/" className="underline mt-2 text-red-400" target="_blank" rel="noopener noreferrer">
+                Your wallet needs to connect with a farcaster account
+              </a>
+              <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
+                Stop
+              </button>
+            </>
+          )}
         </>
-      ) : (
-        !address ? (
-          <WalletConnect />
-        ) : (
-          <>
-            <a href="https://www.farcaster.xyz/" className="underline mt-2 mb-2  text-red-400" target="_blank" rel="noopener noreferrer">
-              Your wallet need to connect with farcaster account(Up to 5 accounts per sec via Airstack)
-            </a>
-            <WalletConnect />
-            <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
-              Stop
-            </button>
-          </>
-        )
-      )} */}
+      )}
       <p  className="mt-16 text-sm text-primary-text">Latest 10 numbers</p>
       <div className="mt-4">
         <div className="flex flex-wrap justify-between mb-4">
