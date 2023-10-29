@@ -16,6 +16,8 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
 
   return (
     <div className="p-6">
+      <p className="mb-4 text-4xl mt-4 text-primary font-bold text-center">The number is {yourNum}</p>
+      
       <div className="grid place-items-center">
         {yourNum === "1337" ?
           <img src="/lotterySuccess/0.gif" alt="Lottery Success" />
@@ -23,7 +25,7 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
           <img src={`/lotteryFailed/${randomGifNum}.gif`} alt="Lottery Failure" />
         }
       </div>
-      <p className="text-4xl mt-10 text-primary font-bold text-center">{yourNum}</p>
+      <p className="mt-4 text-xl  text-primary text-center">Airdropped the NFT to your wallet.</p>
     </div>
   );
 };

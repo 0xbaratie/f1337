@@ -1,4 +1,4 @@
-import { ConnectedSocialAccount } from "../graphql/ConnectedSocialAccount";
+import { FarcasterAccount } from "../graphql/FarcasterAccount";
 
 type SocialType = {
   dappName: string;
@@ -7,25 +7,18 @@ type SocialType = {
 
 async function SocialAccountData(
   address: string,
-  setSocialData: (data: any) => void,
   setFarcasterName: (name: string) => void,
   setConnectedFarcaster: (value: boolean) => void,
   setError: (error: string | null) => void
 ) {
   try {
-    const data = await ConnectedSocialAccount(address);
-    if (data && data.Socials && data.Socials.Social) {
-      setSocialData(data.Socials.Social);
-
-      const farcasterSocial = data.Socials.Social.find((social: SocialType) =>
-        social.dappName.includes("farcaster")
-      );
-
+    const data = await FarcasterAccount(address);
+    
+    if (data && data.Wallet && data.Wallet.socials) {
+      const farcasterSocial = data.Wallet.socials[0];
       if (farcasterSocial) {
         setFarcasterName(farcasterSocial.profileName);
         setConnectedFarcaster(true);
-      } else {
-        setConnectedFarcaster(false);
       }
     }
   } catch (err) {
