@@ -119,9 +119,9 @@ const Home: NextPage = () => {
       <p  className="mt-4 mb-6 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
 
       <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
+      <WalletConnect />
       {isClient && address && (
         <>
-          <WalletConnect />
           {connectedFarcaster ? (
             <>
               <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
