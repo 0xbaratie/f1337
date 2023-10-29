@@ -4,7 +4,7 @@
 
 Are you 1337? Let's try the on-chain experiment!
 
-Contract(BaseGoerli): [0xc3A53b3d1673d8a2ca2404F5D45Eb5Ad89866411](https://goerli.basescan.org/address/0xc3A53b3d1673d8a2ca2404F5D45Eb5Ad89866411) 
+Contract(BaseGoerli): [0xC0502d4198cC7472CE8E6133BFE369e71F0F5f15](https://goerli.basescan.org/address/0xC0502d4198cC7472CE8E6133BFE369e71F0F5f15) 
 
 ## Tech stack
 
