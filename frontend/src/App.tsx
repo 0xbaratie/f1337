@@ -32,13 +32,15 @@ const App = () => {
     setModalOpen(false);
     setYourNum('');
   };
-  const [latestNums, setLatestNums] = useState<string[]>(["....","....","....","....","....","....","....","....","....","...."]);
-  const { data, isError, isLoading } = useContractRead({
+  const [latestNums, setLatestNums] = useState<string[]>(Array(10).fill("...."));
+
+  const { data: numberData } = useContractRead({
     address: NFTContractAddress,
     abi: NFTContractAbi,
-    functionName: 'getLotteryNumbers',
+    functionName: 'getLotteryNumber',
     watch: true,
   })
+
   const [yourNum, setYourNum] = useState('');
 
   const { data: writeData, isLoading: isWriteLoading, isSuccess, write  } = useContractWrite({
@@ -48,18 +50,19 @@ const App = () => {
   })
 
   const hashValue = writeData?.hash;
-  const { data: waitData, isError: waitIsError, isLoading: waitIsLoading } = useWaitForTransaction({
+
+  useWaitForTransaction({
     hash: hashValue,
     onSettled(data, error) {
-      const response = data ? data.logs[0] : [];
-      
-      if ("data" in response) {
-          const responseData = response.data;
-          setYourNum(parseInt(responseData, 16).toString());
-          console.log("@@response=", response);
-          console.log("@@responseData=", parseInt(responseData, 16).toString());
-      }
-  }
+        const response = data ? data.logs[0] : [];
+        
+        if ("data" in response) {
+            const responseData = response.data;
+            setYourNum(parseInt(responseData, 16).toString());
+            console.log("@@response=", response);
+            console.log("@@responseData=", parseInt(responseData, 16).toString());
+        }
+    }
   })
 
   const NumberSpan: React.FC<NumberSpanProps> = ({ children, marginRight = true }) => (
@@ -69,12 +72,16 @@ const App = () => {
   );
 
   useEffect(() => {
-    console.log("@@@stringifiedNums=", data);
-    if (Array.isArray(data) && data.length === 10) {
-      const stringifiedNums = data.map(num => num.toString().padStart(4, '0'));
-      setLatestNums(stringifiedNums);
+    if (numberData !== undefined) { 
+      const numberAsString = numberData.toString().padStart(4, '0');
+      console.log("@@@numberData.padStart(4, '0')=", numberAsString);
+  
+      setLatestNums(prevNums => {
+        const newNums = [numberAsString, ...prevNums];
+        return newNums.slice(0, 10);
+      });
     }
-  }, [data]);
+  }, [numberData]);
 
   useEffect(() => {
     if (address && socialData.length === 0 && !connectedFarcaster) {
@@ -87,6 +94,7 @@ const App = () => {
       setModalOpen(true);
     }
   }, [yourNum]);
+  
 
   RandomInterval(counter, setCounter, setRandomNumber);
 
@@ -147,7 +155,6 @@ const App = () => {
         </div>
       </div>
       
-
     </div>
   );
 };
