@@ -91,9 +91,9 @@ const Home: NextPage = () => {
     
     if (address &&  !connectedFarcaster) {
       // [FOR TEST]
-      // const addressA = "0x6d92e36f3c7c309f90e7ca98d06e6599649961e3"
-      // SocialAccountData(addressA, setFarcasterName, setConnectedFarcaster, setError);
-      SocialAccountData(address, setFarcasterName, setConnectedFarcaster, setError);
+      const addressA = "0x6d92e36f3c7c309f90e7ca98d06e6599649961e3"
+      SocialAccountData(addressA, setFarcasterName, setConnectedFarcaster, setError);
+      // SocialAccountData(address, setFarcasterName, setConnectedFarcaster, setError);
     }
 
     if (isSuccess && parseInt(yourNum) > 0) {
