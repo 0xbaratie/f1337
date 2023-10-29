@@ -1,2 +1,2 @@
 // For Testnet
-export const NFTContractAddress = '0xC0502d4198cC7472CE8E6133BFE369e71F0F5f15'; 
+export const NFTContractAddress = '0xc3A53b3d1673d8a2ca2404F5D45Eb5Ad89866411'; 

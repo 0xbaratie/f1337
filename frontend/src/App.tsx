@@ -32,7 +32,7 @@ const App = () => {
     setModalOpen(false);
     setYourNum('');
   };
-  const [latestNums, setLatestNums] = useState<string[]>(["....","....","....","....","....","....","....","...."]);
+  const [latestNums, setLatestNums] = useState<string[]>(["....","....","....","....","....","....","....","....","....","...."]);
   const { data, isError, isLoading } = useContractRead({
     address: NFTContractAddress,
     abi: NFTContractAbi,
@@ -70,8 +70,8 @@ const App = () => {
 
   useEffect(() => {
     console.log("@@@stringifiedNums=", data);
-    if (Array.isArray(data) && data.length === 8) {
-      const stringifiedNums = data.map(num => num.toString().padStart(4, '0')).reverse();
+    if (Array.isArray(data) && data.length === 10) {
+      const stringifiedNums = data.map(num => num.toString().padStart(4, '0'));
       setLatestNums(stringifiedNums);
     }
   }, [data]);
@@ -100,26 +100,9 @@ const App = () => {
       </FullScreenModal>
       
       <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
-      <p  className="mt-4 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
-      <div className="mt-10">
-        <div className="flex flex-wrap justify-between mb-4">
-          <NumberSpan>....</NumberSpan>
-          {latestNums.slice(0, 4).map((num, index) => (
-            <NumberSpan key={index} marginRight={index !== 3}>{num}</NumberSpan>
-          ))}
-        </div>
-        <div className="flex flex-wrap justify-between">
-          {latestNums.slice(4).map((num, index) => (
-            <NumberSpan key={index + 4} marginRight={true}>{num}</NumberSpan>
-          ))}
-          <NumberSpan marginRight={false}>{randomNumber}</NumberSpan>
-        </div>
-      </div>
-      <div
-        className="mt-12 flex justify-end p-3"
-      >
+      <p  className="mt-4 mb-6 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
 
-      </div>
+      <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
       {/* {address && connectedFarcaster ? ( */}
       {address  ? (
         <>
@@ -131,7 +114,7 @@ const App = () => {
             <span className="mt-4 loading loading-spinner text-primary"></span>
             :
             <button className="mt-6 btn bg-primary text-white" type="button" onClick={() => write()}>
-              Stop number
+              Stop
             </button>
           }
         </>
@@ -145,11 +128,25 @@ const App = () => {
             </a>
             <WalletConnect />
             <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
-              Stop number
+              Stop & Mint
             </button>
           </>
         )
       )}
+      <p  className="mt-16 text-sm text-primary-text">Latest 10 numbers</p>
+      <div className="mt-4">
+        <div className="flex flex-wrap justify-between mb-4">
+          {latestNums.slice(0, 5).map((num, index) => (
+            <NumberSpan key={index} marginRight={index !== 4}>{num}</NumberSpan>
+          ))}
+        </div>
+        <div className="flex flex-wrap justify-between">
+          {latestNums.slice(5).map((num, index) => (
+            <NumberSpan key={index + 5} marginRight={index !== 4}>{num}</NumberSpan>
+          ))}
+        </div>
+      </div>
+      
 
     </div>
   );
