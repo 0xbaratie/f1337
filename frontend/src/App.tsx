@@ -138,7 +138,7 @@ const App = () => {
             </a>
             <WalletConnect />
             <button className="mt-2 btn bg-gray-700 text-black" disabled type="button">
-              Stop & Mint
+              Stop
             </button>
           </>
         )
