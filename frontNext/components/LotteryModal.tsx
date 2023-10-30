@@ -29,6 +29,18 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
       <p className="mt-6 text-sm  text-primary text-center">\ Thank you for playing it /</p>
       <p className="mt-1 text-xl  text-primary text-center">Airdropped the NFT to your wallet.</p>
       <p className="mt-2 text-sm  text-primary text-center">Play it again! There are no limits to play! Stop 1337 and get a special 1337 NFT.</p>
+     
+      <div className="flex justify-center mt-8">
+        <a
+          href={`https://warpcast.com/~/compose?text=The number is ${numberAsString}+f1337.vercel.app`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+        >
+          <img src="/FarcasterIcon.svg" alt="Farcaster logo" className="w-5 h-5" />
+          <span>Share on Farcaster</span>
+        </a>
+      </div>
     </div>
   );
 };
