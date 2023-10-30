@@ -8,6 +8,8 @@ F1337 is a fully onchain game for only Farcaster users. Let's try the on-chain e
 
 Contract(Base Mainnet): [0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C](https://basescan.org/address/0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C) 
 
+Airdropped token (https://opensea.io/collection/f1337 )
+
 ## Tech stack
 
 - BASE chain (https://base.org/ )
