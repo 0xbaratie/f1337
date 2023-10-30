@@ -98,6 +98,13 @@ const Home: NextPage = () => {
     }
 
     if (isSuccess && parseInt(yourNum) > 0) {
+      setLatestNums(prevNums => {
+        if (!prevNums.includes(yourNum)) {
+          const numberAsString = yourNum.toString().padStart(4, '0');
+          return [numberAsString, ...prevNums.slice(0, 9)];
+        }
+        return prevNums;
+      });
       setModalOpen(true);
     }
     setIsClient(true);
