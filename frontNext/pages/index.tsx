@@ -138,7 +138,7 @@ const Home: NextPage = () => {
               {isWriteLoading || parseInt(yourNum) > 0 ? (
                 <span className="mt-4 loading loading-spinner text-primary"></span>
               ) : (
-                <button className="mt-6 btn bg-primary text-white hover:bg-primary-hover" type="button" onClick={() => write()}>
+                <button className="border-none mt-6 btn bg-primary text-white hover:bg-primary-hover" type="button" onClick={() => write()}>
                   Stop
                 </button>
               )}
