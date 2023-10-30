@@ -6,7 +6,7 @@ Are you 1337?
 
 F1337 is a fully onchain game for only Farcaster users. Let's try the on-chain experiment! 
 
-Contract(BaseGoerli): [0xC0502d4198cC7472CE8E6133BFE369e71F0F5f15](https://goerli.basescan.org/address/0xC0502d4198cC7472CE8E6133BFE369e71F0F5f15) 
+Contract(Base Mainnet): [0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C](https://basescan.org/address/0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C) 
 
 ## Tech stack
 
