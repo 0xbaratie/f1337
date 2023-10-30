@@ -116,8 +116,8 @@ const Home: NextPage = () => {
         />
       </FullScreenModal>
       
-      <h1 className="text-3xl mt-10 text-primary font-bold text-center">How can we make a transaction at 1337?</h1>
-      <p  className="mt-4 mb-6 text-ml text-primary-text font-bold">~ Powered by farcaster & Base ~ </p>
+      <h1 className="font-mincho text-3xl mt-10 text-primary font-extrabold text-center">Are you 1337?</h1>
+      <p  className="font-mincho mt-2 mb-6 text-sm text-primary-text">Based on Farcaster & Base</p>
 
       <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
       <WalletConnect />
@@ -138,7 +138,7 @@ const Home: NextPage = () => {
             </>
           ) : (
             <>
-              <a href="https://www.farcaster.xyz/" className="underline mt-4 mb-2 text-red-400" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.farcaster.xyz/" className="underline mt-4 mb-2 text-red-400 text-center" target="_blank" rel="noopener noreferrer">
                 Your wallet needs to connect with a farcaster account (Only get 5/sec for all users due to Airstack API)
               </a>
               <button className="mt-2 btn bg-gray-700 text-black disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed" disabled type="button">
@@ -148,7 +148,7 @@ const Home: NextPage = () => {
           )}
         </>
       )}
-      <p  className="mt-16 text-sm text-primary-text">Latest 10 numbers</p>
+      <p  className="font-mincho mt-16 text-sm text-primary-text">Latest 10 numbers</p>
       <div className="mt-4">
         <div className="flex flex-wrap justify-between mb-4">
           {latestNums.slice(0, 5).map((num, index) => (

@@ -11,14 +11,14 @@ export const Footer = () => {
           onMouseEnter={() => setIsTooltipVisible(true)}
           onMouseLeave={() => setIsTooltipVisible(false)}
         >
-          {!isTooltipVisible && <span>How to use</span>}
+          {!isTooltipVisible && <span className="font-mincho">How to play</span>}
           {isTooltipVisible && (
-            <div className="tooltip text-primary">
-              Can you stop at 1337? But this is only for users with a Wallet connection to Farcaster.
+            <div className="font-mincho tooltip text-primary">
+              The numbers are randomly generated from the hash value for each block. 1337 will be generated with 1 in a 9999 possibility. Can you stop at 1337? 
             </div>
           )}
         </div>
-        <a href="https://github.com/aw-labs/f1337" className="link link-hover p-1" target="_blank" rel="noopener noreferrer">Github</a>
+        <a href="https://github.com/aw-labs/f1337" className="font-mincho link link-hover p-1" target="_blank" rel="noopener noreferrer">Github</a>
       </nav>
     </footer>
   );
