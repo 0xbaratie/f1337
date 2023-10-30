@@ -16,7 +16,7 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
 
   return (
     <div className="p-6">
-      <p className="mb-4 text-4xl mt-4 text-primary font-bold text-center">The number is {yourNum}</p>
+      <p className="mb-4 sm:text-3xl text-xl mt-4 text-primary font-bold text-center">The number is {yourNum}</p>
       
       <div className="grid place-items-center">
         {yourNum === "1337" ?
@@ -25,7 +25,9 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
           <img src={`/failed/${randomGifNum}.GIF`} alt="Lottery Failure" />
         }
       </div>
-      <p className="mt-4 text-xl  text-primary text-center">Airdropped the NFT to your wallet.</p>
+      <p className="mt-6 text-sm  text-primary text-center">\ Thank you for playing it /</p>
+      <p className="mt-1 text-xl  text-primary text-center">Airdropped the NFT to your wallet.</p>
+      <p className="mt-2 text-sm  text-primary text-center">Play it again! There are no limits to play! Stop 1337 and get a special 1337 NFT.</p>
     </div>
   );
 };
