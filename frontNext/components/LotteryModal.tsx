@@ -8,6 +8,7 @@ interface LotteryModalProps {
 
 const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
   const [randomGifNum, setRandomGifNum] = useState<number>(0);
+  const numberAsString = yourNum.toString().padStart(4, '0');
 
   useEffect(() => {
     const generatedNum = Math.floor(Math.random() * 49);
@@ -16,10 +17,10 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
 
   return (
     <div className="p-6">
-      <p className="mb-4 sm:text-3xl text-xl mt-4 text-primary font-bold text-center">The number is {yourNum}</p>
+      <p className="mb-4 sm:text-3xl text-xl mt-4 text-primary font-bold text-center">The number is {numberAsString}</p>
       
       <div className="grid place-items-center">
-        {yourNum === "1337" ?
+        {numberAsString === "1337" ?
           <img src="/success/0.GIF" alt="Lottery Success" />
           :
           <img src={`/failed/${randomGifNum}.GIF`} alt="Lottery Failure" />
