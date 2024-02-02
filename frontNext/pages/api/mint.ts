@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { http, createWalletClient, createPublicClient } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { base } from "viem/chains";
-import { NFTContractAbi } from "../../data/NFTContractAbi";
-import { NFTContractAddress } from "../../data/NFTContractAddress";
+import { MintDelegaterAbi } from "../../data/NFTContractAbi";
+import { MintDelegaterAddress } from "../../data/NFTContractAddress";
 
 const rpcUrl = "https://base.publicnode.com";
 
@@ -35,11 +35,11 @@ export default async function handler(
       // const [account] = await walletClient.getAddresses();
 
       const { request } = await publicClient.simulateContract({
-        address: NFTContractAddress,
-        abi: NFTContractAbi,
+        address: MintDelegaterAddress,
+        abi: MintDelegaterAbi,
         functionName: "mint",
         account,
-        args: [],
+        args: [addressFromFid],
       });
       const hash = await walletClient.writeContract(request);
 
