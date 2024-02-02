@@ -10,7 +10,8 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     base: {
-      url: "https://base.llamarpc.com",
+      // url: "https://base.llamarpc.com",
+      url: "https://base.drpc.org",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
