@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const generatedNum =  Math.floor(Math.random() * 49);
   if (req.method === "POST") {
     try {
       console.log("req.body", req.body);
@@ -34,7 +35,7 @@ export default async function handler(
       });
       // const [account] = await walletClient.getAddresses();
 
-      const { request } = await publicClient.simulateContract({
+      const { request, result } = await publicClient.simulateContract({
         address: MintDelegaterAddress,
         abi: MintDelegaterAbi,
         functionName: "mint",
@@ -48,27 +49,55 @@ export default async function handler(
       });
       const blockNumber = receipt.blockNumber;
 
-      // Return an HTML response
-      res.setHeader("Content-Type", "text/html");
-      res.status(200).send(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Vote Recorded</title>
-          <meta property="og:title" content="Vote Recorded">
-          <meta
-            property="og:image"
-            content="https://on-chain-cow-farcaster-frame.vercel.app/img/on-chain-cow-happy-cow.png"
-          />
-          <meta name="test:blockNumber" content="${blockNumber}">
-          <meta name="fc:frame" content="vNext">
-          <meta
-            property="fc:frame:image"
-            content="https://on-chain-cow-farcaster-frame.vercel.app/img/on-chain-cow-happy-cow.png"
-          />
-        </head>
-      </html>
-    `);
+      console.log("@@Result: ", result);
+      const resultString = result.toString();
+      
+      if (resultString === "1337") {
+        // Success HTML Response
+        res.setHeader("Content-Type", "text/html");
+        res.status(200).send(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>You are 1337 - F1337</title>
+              <meta property="og:title" content="You are 1337">
+              <meta
+                property="og:image"
+                content="https://f1337.vercel.app/ogp.png"
+              />
+              <meta name="test:blockNumber" content="${blockNumber}">
+              <meta name="fc:frame" content="vNext">
+              <meta
+                property="fc:frame:image"
+                content="https://f1337.vercel.app/success/0.GIF"
+              />
+            </head>
+          </html>
+        `);
+      } else {
+        // Failure HTML Response
+        res.setHeader("Content-Type", "text/html");
+        res.status(200).send(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>You are not 1337 - F1337</title>
+              <meta property="og:title" content="You are not 1337">
+              <meta
+                property="og:image"
+                content="https://f1337.vercel.app/ogp.png"
+              />
+              <meta name="test:blockNumber" content="${blockNumber}">
+              <meta name="fc:frame" content="vNext">
+              <meta
+                property="fc:frame:image"
+                content="https://f1337.vercel.app//failed/${generatedNum}.GIF"
+              />
+            </head>
+          </html>
+        `);
+      }
+
     } catch (error) {
       console.error(error);
       res.status(500).send("Error generating image");
