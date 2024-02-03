@@ -20,6 +20,25 @@ export default async function handler(
       const addressFromFid = await getAddrByFid(fid);
       console.log("Extracted address from FID: ", addressFromFid);
 
+      if (addressFromFid === null) {
+        // Address not found, return a specific HTML response
+        res.setHeader("Content-Type", "text/html");
+        res.status(200).send(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Connect your address </title>
+              <meta property="og:title" content="You need to connect your address with farcaster account.">
+              <meta
+                property="og:image"
+                content="https://f1337.vercel.app/ogp.png"
+              />
+              <meta name="fc:frame" content="vNext">
+            </head>
+          </html>
+        `);
+      }
+
       const account = privateKeyToAccount(
         process.env.PRIVATE_KEY as `0x${string}`
       );
@@ -124,16 +143,18 @@ async function getAddrByFid(fid: number) {
   const resp = await fetch(options.url, { headers: options.headers });
   console.log("Response: ", resp);
   const responseBody = await resp.json(); // Parse the response body as JSON
-  if (responseBody.users) {
-    const userVerifications = responseBody.users[0];
-    if (userVerifications.verifications) {
-      console.log(
-        "User address from Neynar API: ",
-        userVerifications.verifications[0]
-      );
-      return userVerifications.verifications[0].toString();
+  if (responseBody.users && responseBody.users[0]) {
+    const userVerifications = responseBody.users[0].verifications;
+    if (userVerifications && userVerifications.length > 0) {
+      console.log("User address from Neynar API: ", userVerifications[0]);
+      return userVerifications[0].toString();
+    } else {
+      console.log("No verifications found for user.");
+      // Return a default or error value here
+      return null; // or handle this scenario appropriately
     }
+  } else {
+    console.log("Could not fetch user address from Neynar API for FID: ", fid);
+    return "0x0000000000000000000000000000000000000000"; // Consider handling this scenario differently
   }
-  console.log("Could not fetch user address from Neynar API for FID: ", fid);
-  return "0x0000000000000000000000000000000000000000";
 }
