@@ -22,8 +22,7 @@ export async function generateMetadata(
         title: "f1337",
         openGraph: {
             title: "f1337",
-            // TODO: Change image
-            images: ['https://raw.githubusercontent.com/yamapyblack/AttackOnWallet/a28287d1d411eb844170668b39218e09a087d89b/frontend/public/noun.png'],
+            images: ['https://f1337.vercel.app/ogp.png'],
         },
         other: {
             ...fcMetadata,
