@@ -11,7 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let generatedNum =  Math.floor(Math.random() * 49);
+  const generatedNum =  Math.floor(Math.random() * 49);
   if (req.method === "POST") {
     try {
       console.log("req.body", req.body);
