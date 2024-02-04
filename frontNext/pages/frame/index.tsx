@@ -1,4 +1,4 @@
-import {Metadata, ResolvingMetadata} from "next";
+import type { Metadata } from 'next';
 import RandomInterval from '../../data/RandomInterval';
 import React, { useState } from 'react';
 import { getFrameMetadata } from '@coinbase/onchainkit';
@@ -40,9 +40,9 @@ const frameMetadata = getFrameMetadata({
     ],
     image: 'https://i.gyazo.com/40a269363f416f28caff4f8d9601d670.gif',
     post_url: `${process.env['HOST']}/api/mint`,
-    });
+});
 
-    export const metadata: Metadata = {
+export const metadata: Metadata = {
     title: 'F1337',
     description: 'Are you 1337?',
     openGraph: {
