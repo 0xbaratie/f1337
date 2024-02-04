@@ -115,62 +115,85 @@ const Home: NextPage = () => {
   RandomInterval(counter, setCounter, setRandomNumber);
   
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <FullScreenModal isOpen={modalOpen} onClose={closeModal}>
-        <LotteryModal
-          onClose={closeModal}
-          yourNum={yourNum}
+    <>
+      <Head>
+        <title>F1337</title>
+        <meta property='og:title' content='F1337 - Are you 1337?' />
+        <meta
+          property='og:description'
+          content='F1337 is a fully onchain number game for only Farcaster users.'
         />
-      </FullScreenModal>
-      
-      <h1 className="font-mincho text-3xl mt-10 text-primary font-extrabold text-center">Are you 1337?</h1>
-      <p  className="font-mincho mt-2 mb-6 text-sm text-primary-text">Based on Farcaster & Base</p>
+        <meta property='og:image' content='/ogp.png' />
+        <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
+        <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+        <link rel='apple-touch-icon' sizes='200x200' href='/apple-touch-icon.png' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='F1337 - Are you 1337?' />
+        <meta
+          name='twitter:description'
+          content='F1337 is a fully onchain number game for only Farcaster users.'
+        />
+        <meta
+          name='twitter:image'
+          content='https://f1337.vercel.app/ogp.png'
+        />
+      </Head>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+        <FullScreenModal isOpen={modalOpen} onClose={closeModal}>
+          <LotteryModal
+            onClose={closeModal}
+            yourNum={yourNum}
+          />
+        </FullScreenModal>
+        
+        <h1 className="font-mincho text-3xl mt-10 text-primary font-extrabold text-center">Are you 1337?</h1>
+        <p  className="font-mincho mt-2 mb-6 text-sm text-primary-text">Based on Farcaster & Base</p>
 
-      <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
-      <WalletConnect />
-      {isClient && address && (
-        <>
-          {connectedFarcaster ? (
-            <>
-              <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
-                @{farcasterName}
-              </a>
-              {isWriteLoading || parseInt(yourNum) > 0 ? (
-                <span className="mt-4 loading loading-spinner text-primary"></span>
-              ) : (
-                <button className="border-none mt-6 btn bg-primary text-white hover:bg-primary-hover" type="button" onClick={() => write()}>
+        <p  className="mt-4 mb-6 text-4xl text-primary-text font-bold">{randomNumber}</p>
+        <WalletConnect />
+        {isClient && address && (
+          <>
+            {connectedFarcaster ? (
+              <>
+                <a href={`https://warpcast.com/${farcasterName}`} className="mt-2 text-primary" target="_blank" rel="noopener noreferrer">
+                  @{farcasterName}
+                </a>
+                {isWriteLoading || parseInt(yourNum) > 0 ? (
+                  <span className="mt-4 loading loading-spinner text-primary"></span>
+                ) : (
+                  <button className="border-none mt-6 btn bg-primary text-white hover:bg-primary-hover" type="button" onClick={() => write()}>
+                    Stop
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <a href="https://www.farcaster.xyz/" className="underline mt-4 mb-2 text-red-400 text-center" target="_blank" rel="noopener noreferrer">
+                  Your wallet needs to connect with a farcaster account (Only get 5/sec for all users due to Airstack API)
+                </a>
+                <button className="mt-2 btn bg-gray-700 text-black disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed" disabled type="button">
                   Stop
                 </button>
-              )}
-            </>
-          ) : (
-            <>
-              <a href="https://www.farcaster.xyz/" className="underline mt-4 mb-2 text-red-400 text-center" target="_blank" rel="noopener noreferrer">
-                Your wallet needs to connect with a farcaster account (Only get 5/sec for all users due to Airstack API)
-              </a>
-              <button className="mt-2 btn bg-gray-700 text-black disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed" disabled type="button">
-                Stop
-              </button>
-            </>
-          )}
-        </>
-      )}
-      <p  className="font-mincho mt-16 text-sm text-primary-text">Latest 10 numbers</p>
-      <div className="mt-4">
-        <div className="flex flex-wrap justify-between mb-4">
-          {latestNums.slice(0, 5).map((num, index) => (
-            <NumberSpan key={index} marginRight={index !== 4}>{num}</NumberSpan>
-          ))}
+              </>
+            )}
+          </>
+        )}
+        <p  className="font-mincho mt-16 text-sm text-primary-text">Latest 10 numbers</p>
+        <div className="mt-4">
+          <div className="flex flex-wrap justify-between mb-4">
+            {latestNums.slice(0, 5).map((num, index) => (
+              <NumberSpan key={index} marginRight={index !== 4}>{num}</NumberSpan>
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-between">
+            {latestNums.slice(5).map((num, index) => (
+              <NumberSpan key={index + 5} marginRight={index !== 4}>{num}</NumberSpan>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-wrap justify-between">
-          {latestNums.slice(5).map((num, index) => (
-            <NumberSpan key={index + 5} marginRight={index !== 4}>{num}</NumberSpan>
-          ))}
-        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-
+    </>
   );
 };
 
