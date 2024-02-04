@@ -16,7 +16,7 @@ export async function generateMetadata(
         "fc:frame:post_url": `${process.env['HOST']}/api/mint`,
         "fc:frame:image": 'https://i.gyazo.com/40a269363f416f28caff4f8d9601d670.gif',
     };
-    fcMetadata[`fc:frame:button:1`] = "Stop";
+    fcMetadata[`fc:frame:button:1`] = "Recast and click 👉 Mint";
 
     return {
         title: "f1337",
