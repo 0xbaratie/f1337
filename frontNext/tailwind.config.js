@@ -11,9 +11,9 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#855DCD',
-          text: '#855DCD',
-          hover: '#A682FF',
+          DEFAULT: '#FF3131',
+          text: '#FF3131',
+          hover: '#FF8585',
         },
       },
       fontFamily: {
