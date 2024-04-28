@@ -1,14 +1,14 @@
-# F1337
+# R1337
 
-![F1337](https://f1337.vercel.app/success/0.GIF)
+![R1337](https://r1337.vercel.app/success/0.GIF)
 
 Are you 1337? 
 
-F1337 is a fully onchain game for only Farcaster users. Let's try the on-chain experiment! 
+R1337 is a fully onchain game for only Farcaster users. Let's try the on-chain experiment! 
 
 Contract(Base Mainnet): [0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C](https://basescan.org/address/0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C) 
 
-Airdropped token (https://opensea.io/collection/f1337 )
+Airdropped token (https://opensea.io/collection/r1337 )
 
 ## Tech stack
 
