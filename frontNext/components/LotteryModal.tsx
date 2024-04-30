@@ -11,7 +11,7 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
   const numberAsString = yourNum.toString().padStart(4, '0');
 
   useEffect(() => {
-    const generatedNum = Math.floor(Math.random() * 49);
+    const generatedNum = Math.floor(Math.random() * 22);
     setRandomGifNum(generatedNum);
   }, [yourNum]);
 
