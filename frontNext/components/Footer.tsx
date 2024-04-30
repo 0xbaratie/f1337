@@ -18,7 +18,8 @@ export const Footer = () => {
             </div>
           )}
         </div>
-        <a href="https://github.com/aw-labs/f1337" className="font-mincho link link-hover p-1" target="_blank" rel="noopener noreferrer">Github</a>
+        <a href="https://github.com/0xbaratie/f1337" className="font-mincho link link-hover p-1" target="_blank" rel="noopener noreferrer">Github</a>
+        <a href="https://twitter.com/0xbaratie" className="font-mincho link link-hover p-1" target="_blank" rel="noopener noreferrer">X</a>
       </nav>
     </footer>
   );
