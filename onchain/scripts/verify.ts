@@ -2,13 +2,13 @@ import env from "hardhat";
 
 async function main() {
   await env.run("verify:verify", {
-    address: "0x473bF1B585808F1C7eEF20288eD315C98A779e33",
+    address: "0xE2DA1fF9189cac300B884Ad6845BB28808496767",
     constructorArguments: [],
   });
 
   // await env.run("verify:verify", {
-  //   address: "0xA321c4DE2A1aCCD8CBe78bC79E9623F8E18A2837",
-  //   constructorArguments: ["0x15EBaAD8717A6B71116ffAF1E0FD4A3b4DE0F96C"],
+  //   address: "0xce691645FfAf7122a14B9b2431C2EeBB5Ed3fBfE",
+  //   constructorArguments: ["0xE2DA1fF9189cac300B884Ad6845BB28808496767"],
   // });
 }
 
