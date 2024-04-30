@@ -28,6 +28,12 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
       gasPrice: 1000000000,
     },
+    redstonetest: {
+      url: "https://rpc.holesky.redstone.xyz",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 1000000000,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
