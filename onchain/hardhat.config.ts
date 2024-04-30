@@ -15,6 +15,19 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    opsepolia: {
+      url: "https://sepolia.optimism.io",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      //1 gwei
+      gasPrice: 1000000000,
+    },
+    basesepolia: {
+      url: "https://sepolia.base.org",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 1000000000,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
