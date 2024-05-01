@@ -1,6 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-foundry";
+import "@nomiclabs/hardhat-etherscan";
 
 const config: HardhatUserConfig = {
   networks: {
@@ -30,6 +31,12 @@ const config: HardhatUserConfig = {
     },
     redstonetest: {
       url: "https://rpc.holesky.redstone.xyz",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 1000000000,
+    },
+    redstonetest2: {
+      url: "https://rpc.garnetchain.com",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
       gasPrice: 1000000000,
