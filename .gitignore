@@ -2,3 +2,4 @@ frontNext/.env
 frontend/.env
 .DS_Store
 .gitmodules
+node_modules/
