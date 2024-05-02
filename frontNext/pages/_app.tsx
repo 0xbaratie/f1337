@@ -10,11 +10,32 @@ import {
 import { publicProvider } from 'wagmi/providers/public';
 import Head from 'next/head'
 
+
+const customChain = {
+  id: 690,
+  name: 'Redstone',
+  network: 'Redstone',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Custom Token',
+    symbol: 'CT',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.redstonechain.com'],
+    },
+    public: {
+      http: ['https://rpc.redstonechain.com'],
+    },
+  },
+  blockExplorers: {
+    default: { name: 'Block explorer', url: 'https://explorer.redstone.xyz' },
+  },
+  testnet: false,
+} as const;
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [
-    base,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [baseGoerli] : [base]),
-  ],
+  [customChain],
   [publicProvider()]
 );
 
@@ -40,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta property='og:title' content='R1337 - Are you 1337?' />
           <meta
             property='og:description'
-            content='R1337 is a fully onchain number game for only Farcaster users.'
+            content='R1337 is a fully onchain number game for AW/FOCG users.'
           />
           <meta property='og:image' content='/ogp.png' />
           <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
@@ -50,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name='twitter:title' content='R1337 - Are you 1337?' />
           <meta
             name='twitter:description'
-            content='R1337 is a fully onchain number game for only Farcaster users.'
+            content='R1337 is a fully onchain number game for AW/FOCG users.'
           />
           <meta
             name='twitter:image'
