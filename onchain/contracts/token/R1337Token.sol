@@ -30,6 +30,14 @@ contract R1337Token is ERC1155, Ownable {
         tokenUri = ITokenUri(_tokenUri);
     }
 
+    function name() public pure returns (string memory) {
+        return "R1337";
+    }
+
+    function symbol() public pure returns (string memory) {
+        return "R1337";
+    }
+
     function setMeta0(
         string memory _name0,
         string memory _description0

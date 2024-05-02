@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 async function main() {
   const token = await ethers.getContractAt(
     "R1337Token",
-    "0x5cA58FCAb915F032688f388Dafe45E19a8f7CFF3"
+    "0x7793A1872Ac1E417fbF5d191281215C7434430C0"
   );
 
   const tx0 = await token.togglePaused();
