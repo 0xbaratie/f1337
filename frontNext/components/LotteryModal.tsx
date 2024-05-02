@@ -32,7 +32,7 @@ const LotteryModal = ({ onClose, yourNum }: LotteryModalProps) => {
      
       <div className="flex justify-center mt-8">
         <a
-          href={`https://warpcast.com/~/compose?text=The number is ${numberAsString}. R1337 is a fully onchain game for only Farcaster users. Let's try the on-chain experiment!+r1337.vercel.app`}
+          href={`https://warpcast.com/~/compose?text=The number is ${numberAsString}. R1337 is a fully onchain game on Redstone. Let's try the on-chain experiment!+r1337.vercel.app`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
