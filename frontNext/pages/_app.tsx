@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             property='og:description'
             content='R1337 is a fully onchain number game for AW/FOCG users.'
           />
-          <meta property='og:image' content='/ogp.png' />
+          <meta property='og:image' content='/ogpred.png' />
           <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
           <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
           <link rel='apple-touch-icon' sizes='200x200' href='/apple-touch-icon.png' />
@@ -75,7 +75,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <meta
             name='twitter:image'
-            content='https://r1337.vercel.app/ogp.png'
+            content='https://r1337.vercel.app/ogpred.png'
           />
         </Head>
         <Component {...pageProps} />
