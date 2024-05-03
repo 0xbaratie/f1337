@@ -41,9 +41,33 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
       gasPrice: 1000000000,
     },
+    redstone: {
+      url: "https://rpc.redstonechain.com",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 1000000000,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+    customChains: [
+      {
+        network: "redstonetest2",
+        chainId: 17069,
+        urls: {
+          apiURL: "https://garnet.blockscout.com/api",
+          browserURL: "https://garnet.blockscout.com"
+        }
+      },
+      {
+        network: "redstone",
+        chainId: 690,
+        urls: {
+          apiURL: "https://explorer.redstone.xyz/api",
+          browserURL: "https://explorer.redstone.xyz"
+        }
+      }
+    ]
   },
   solidity: {
     version: "0.8.20",
